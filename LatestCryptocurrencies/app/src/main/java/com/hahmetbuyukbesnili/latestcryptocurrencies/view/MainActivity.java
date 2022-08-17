@@ -11,7 +11,7 @@ import com.google.gson.GsonBuilder;
 import com.hahmetbuyukbesnili.latestcryptocurrencies.BuildConfig;
 import com.hahmetbuyukbesnili.latestcryptocurrencies.adapter.CryptoAdapter;
 import com.hahmetbuyukbesnili.latestcryptocurrencies.databinding.ActivityMainBinding;
-import com.hahmetbuyukbesnili.latestcryptocurrencies.model.CryptoModel;
+import com.hahmetbuyukbesnili.latestcryptocurrencies.model.CryptoTestModel;
 import com.hahmetbuyukbesnili.latestcryptocurrencies.service.CryptoAPI;
 
 import java.util.ArrayList;
@@ -27,7 +27,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
-    ArrayList<CryptoModel> cryptoModels;
+    ArrayList<CryptoTestModel> cryptoModels;
     Retrofit retrofit;
     CryptoAdapter cryptoAdapter;
     CompositeDisposable compositeDisposable;
@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
                 .subscribe(MainActivity.this::handleResponse));
     }
 
-    private void handleResponse(List<CryptoModel> cryptoModelList) {
+    private void handleResponse(List<CryptoTestModel> cryptoModelList) {
         cryptoModels = new ArrayList<>(cryptoModelList);
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
         cryptoAdapter = new CryptoAdapter(cryptoModels);

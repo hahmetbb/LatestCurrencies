@@ -12,16 +12,16 @@ import androidx.swiperefreshlayout.widget.CircularProgressDrawable;
 
 import com.bumptech.glide.Glide;
 import com.hahmetbuyukbesnili.latestcryptocurrencies.databinding.RecyclerRowBinding;
-import com.hahmetbuyukbesnili.latestcryptocurrencies.model.CryptoModel;
+import com.hahmetbuyukbesnili.latestcryptocurrencies.model.CryptoTestModel;
 
 import java.util.ArrayList;
 
 public class CryptoAdapter extends RecyclerView.Adapter<CryptoAdapter.CryptoHolder> {
 
     private String[] colors = {"#b33356", "#c9d6ff", "#a06020", "#321123", "#8ec127", "#dab2b1"};
-    private ArrayList<CryptoModel> cryptoList;
+    private ArrayList<CryptoTestModel> cryptoList;
 
-    public CryptoAdapter(ArrayList<CryptoModel> cryptoList) {
+    public CryptoAdapter(ArrayList<CryptoTestModel> cryptoList) {
         this.cryptoList = cryptoList;
     }
 
@@ -51,31 +51,31 @@ public class CryptoAdapter extends RecyclerView.Adapter<CryptoAdapter.CryptoHold
             this.binding = binding;
         }
 
-        public void bind(CryptoModel cryptoModel, String[] colors, Integer position) {
+        public void bind(CryptoTestModel cryptoModel, String[] colors, Integer position) {
             itemView.setBackgroundColor(Color.parseColor(colors[position % 6]));
-            binding.nameText.setText(cryptoModel.name);
-            binding.currencyText.setText(cryptoModel.currency);
-            binding.priceText.setText(cryptoModel.price);
+            binding.nameText.setText(cryptoModel.getName());
+            binding.currencyText.setText(cryptoModel.getCurrency());
+            binding.priceText.setText(cryptoModel.getPrice());
 
             CircularProgressDrawable circularProgressDrawable1 = new CircularProgressDrawable(itemView.getContext());
             circularProgressDrawable1.setStrokeWidth(5f);
             circularProgressDrawable1.setCenterRadius(30f);
             circularProgressDrawable1.start();
 
-            if (cryptoModel.logo.contains("svg")) {
+            if (cryptoModel.getLogoUrl().contains("svg")) {
                 Glide.with(itemView.getContext())
                         .as(PictureDrawable.class)
-                        .load(cryptoModel.logo)
+                        .load(cryptoModel.getLogoUrl())
                         .placeholder(circularProgressDrawable1)
                         .into(binding.ivCoin);
             } else {
                 Glide.with(itemView.getContext())
-                        .load(cryptoModel.logo)
+                        .load(cryptoModel.getLogoUrl())
                         .placeholder(circularProgressDrawable1)
                         .into(binding.ivCoin);
             }
 
-            Log.d("TAG", cryptoModel.logo);
+            Log.d("TAG", cryptoModel.getLogoUrl());
 
         }
     }
