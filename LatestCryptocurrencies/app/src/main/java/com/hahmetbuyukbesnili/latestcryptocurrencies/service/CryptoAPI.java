@@ -1,5 +1,6 @@
 package com.hahmetbuyukbesnili.latestcryptocurrencies.service;
 
+import com.hahmetbuyukbesnili.latestcryptocurrencies.BuildConfig;
 import com.hahmetbuyukbesnili.latestcryptocurrencies.model.CryptoModel;
 
 import java.util.List;
@@ -9,6 +10,6 @@ import retrofit2.http.GET;
 
 public interface CryptoAPI {
 
-    @GET("currencies/ticker?key=20146f6969d72388967edb912eba519388ae17a9")
+    @GET("currencies/ticker?key=" + BuildConfig.TOKEN)
     Observable<List<CryptoModel>> getData();
 }

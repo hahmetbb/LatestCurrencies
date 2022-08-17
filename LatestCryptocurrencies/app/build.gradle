@@ -2,6 +2,11 @@ plugins {
     id 'com.android.application'
 }
 
+Properties properties = new Properties()
+if (project.rootProject.file('local.properties').canRead()) {
+    properties.load(project.rootProject.file("local.properties").newDataInputStream())
+}
+
 android {
     compileSdk 32
 
@@ -17,10 +22,12 @@ android {
 
     buildTypes {
         debug {
+            buildConfigField 'String', 'TOKEN', properties.getProperty('CRYPTO_KEY')
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
         release {
+            buildConfigField 'String', 'TOKEN', properties.getProperty('CRYPTO_KEY')
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
