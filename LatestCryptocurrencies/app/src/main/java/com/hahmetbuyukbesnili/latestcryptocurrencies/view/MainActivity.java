@@ -1,14 +1,14 @@
 package com.hahmetbuyukbesnili.latestcryptocurrencies.view;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-
 import android.os.Bundle;
 import android.view.View;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.hahmetbuyukbesnili.latestcryptocurrencies.R;
+import com.hahmetbuyukbesnili.latestcryptocurrencies.BuildConfig;
 import com.hahmetbuyukbesnili.latestcryptocurrencies.adapter.CryptoAdapter;
 import com.hahmetbuyukbesnili.latestcryptocurrencies.databinding.ActivityMainBinding;
 import com.hahmetbuyukbesnili.latestcryptocurrencies.model.CryptoModel;
@@ -28,7 +28,6 @@ public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
     ArrayList<CryptoModel> cryptoModels;
-    private String BASE_URL = "https://api.nomics.com/v1/";
     Retrofit retrofit;
     CryptoAdapter cryptoAdapter;
     CompositeDisposable compositeDisposable;
@@ -44,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
         Gson gson = new GsonBuilder().setLenient().create();
 
         retrofit = new Retrofit.Builder()
-                .baseUrl(BASE_URL)
+                .baseUrl(BuildConfig.BASE_URL)
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
@@ -52,14 +51,14 @@ public class MainActivity extends AppCompatActivity {
         loadData();
     }
 
-    private void loadData(){
+    private void loadData() {
         final CryptoAPI cryptoAPI = retrofit.create(CryptoAPI.class);
 
         compositeDisposable = new CompositeDisposable();
         compositeDisposable.add(cryptoAPI.getData()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(MainActivity.this :: handleResponse));
+                .subscribe(MainActivity.this::handleResponse));
     }
 
     private void handleResponse(List<CryptoModel> cryptoModelList) {
