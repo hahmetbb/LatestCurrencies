@@ -42,11 +42,11 @@ public class YearlyFragment extends Fragment {
 
         textView = view.findViewById(R.id.textYearly);
 
-        pageViewModel.getYear().observe(requireActivity(), new Observer<CryptoTestModel.D>() {
+        /*pageViewModel.getYear().observe(requireActivity(), new Observer<CryptoTestModel.D>() {
             @Override
             public void onChanged(CryptoTestModel.D d) {
                 textView.setText(d.toString());
             }
-        });
+        });*/
     }
 }

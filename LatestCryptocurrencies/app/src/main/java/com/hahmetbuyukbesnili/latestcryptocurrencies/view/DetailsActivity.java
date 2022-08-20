@@ -1,5 +1,6 @@
 package com.hahmetbuyukbesnili.latestcryptocurrencies.view;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 
@@ -9,6 +10,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.tabs.TabLayout;
+import com.hahmetbuyukbesnili.latestcryptocurrencies.R;
 import com.hahmetbuyukbesnili.latestcryptocurrencies.databinding.ActivityDetailsBinding;
 import com.hahmetbuyukbesnili.latestcryptocurrencies.model.CryptoTestModel;
 import com.hahmetbuyukbesnili.latestcryptocurrencies.view.main.PageViewModel;
@@ -36,11 +38,12 @@ public class DetailsActivity extends AppCompatActivity {
 
         CryptoTestModel cryptoModel = (CryptoTestModel) getIntent().getSerializableExtra("json");
 
-        pageViewModel = new ViewModelProvider(this).get(PageViewModel.class);
+        String backgroundColor = getIntent().getStringExtra("backgroundColor");
 
-        pageViewModel.setDay(cryptoModel.getOneD());
-        pageViewModel.setMonth(cryptoModel.getMonthD());
-        pageViewModel.setYear(cryptoModel.getYearD());
+        pageViewModel = new ViewModelProvider(this).get(PageViewModel.class);
+        binding.linearLayout.setBackgroundColor(Color.parseColor(backgroundColor));
+        binding.tabs.setBackgroundColor(Color.parseColor(backgroundColor));
+        binding.tabs.setSelectedTabIndicatorColor(getColor(R.color.white));
 
         binding.tCrypto.setText(cryptoModel.getName());
         binding.tCurrency.setText(cryptoModel.getCurrency());

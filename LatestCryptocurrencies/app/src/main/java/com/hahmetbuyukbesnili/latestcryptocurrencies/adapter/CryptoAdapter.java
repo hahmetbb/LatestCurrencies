@@ -39,14 +39,6 @@ public class CryptoAdapter extends RecyclerView.Adapter<CryptoAdapter.CryptoHold
     @Override
     public void onBindViewHolder(@NonNull CryptoHolder holder, @SuppressLint("RecyclerView") int position) {
         holder.bind(cryptoList.get(position), colors, position);
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(holder.itemView.getContext(), DetailsActivity.class);
-                intent.putExtra("json", cryptoList.get(position));
-                holder.itemView.getContext().startActivity(intent);
-            }
-        });
     }
 
     @Override
@@ -64,7 +56,8 @@ public class CryptoAdapter extends RecyclerView.Adapter<CryptoAdapter.CryptoHold
         }
 
         public void bind(CryptoTestModel cryptoModel, String[] colors, Integer position) {
-            itemView.setBackgroundColor(Color.parseColor(colors[position % 6]));
+            String backgroundColor = colors[position % 6];
+            itemView.setBackgroundColor(Color.parseColor(backgroundColor));
             binding.nameText.setText(cryptoModel.getName());
             binding.currencyText.setText(cryptoModel.getCurrency());
             binding.priceText.setText(cryptoModel.getPrice());
@@ -87,8 +80,12 @@ public class CryptoAdapter extends RecyclerView.Adapter<CryptoAdapter.CryptoHold
                         .into(binding.ivCoin);
             }
 
-            //Log.d("TAG", cryptoModel.getLogoUrl());
-
+            itemView.setOnClickListener(v -> {
+                Intent intent = new Intent(itemView.getContext(), DetailsActivity.class);
+                intent.putExtra("json", cryptoList.get(position));
+                intent.putExtra("backgroundColor", backgroundColor);
+                itemView.getContext().startActivity(intent);
+            });
         }
     }
 }

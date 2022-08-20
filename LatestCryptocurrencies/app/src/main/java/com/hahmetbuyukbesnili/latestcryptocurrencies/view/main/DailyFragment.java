@@ -46,12 +46,5 @@ public class DailyFragment extends Fragment {
         textView = view.findViewById(R.id.textDaily);
 
        // Log.d("TAG", cryptoModel.getLogoUrl());
-
-        pageViewModel.getDay().observe(requireActivity(), new Observer<CryptoTestModel.D>() {
-            @Override
-            public void onChanged(CryptoTestModel.D d) {
-                textView.setText(d.toString());
-            }
-        });
     }
 }
