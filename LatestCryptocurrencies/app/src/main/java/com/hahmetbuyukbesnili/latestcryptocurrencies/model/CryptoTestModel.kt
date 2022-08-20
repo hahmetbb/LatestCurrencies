@@ -1,7 +1,7 @@
 package com.hahmetbuyukbesnili.latestcryptocurrencies.model
 
-
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class CryptoTestModel(
     @SerializedName("circulating_supply")
@@ -9,13 +9,13 @@ data class CryptoTestModel(
     @SerializedName("currency")
     val currency: String,
     @SerializedName("1d")
-    val oned: D,
+    val oneD: D,
     @SerializedName("7d")
-    val sevend: D,
+    val weekD: D,
     @SerializedName("30d")
-    val thirtyd: D,
+    val monthD: D,
     @SerializedName("365d")
-    val yeard: D,
+    val yearD: D,
     @SerializedName("first_candle")
     val firstCandle: String,
     @SerializedName("first_order_book")
@@ -60,7 +60,7 @@ data class CryptoTestModel(
     val symbol: String,
     @SerializedName("ytd")
     val ytd: Ytd
-) {
+) : Serializable {
 
     data class D(
         @SerializedName("market_cap_change")
@@ -77,7 +77,7 @@ data class CryptoTestModel(
         val volumeChange: String,
         @SerializedName("volume_change_pct")
         val volumeChangePct: String
-    )
+    ) : Serializable
 
     data class Ytd(
         @SerializedName("market_cap_change")
@@ -94,5 +94,5 @@ data class CryptoTestModel(
         val volumeChange: String,
         @SerializedName("volume_change_pct")
         val volumeChangePct: String
-    )
+    ) : Serializable
 }

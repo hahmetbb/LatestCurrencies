@@ -32,7 +32,6 @@ public class MainActivity extends AppCompatActivity {
     CryptoAdapter cryptoAdapter;
     CompositeDisposable compositeDisposable;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
